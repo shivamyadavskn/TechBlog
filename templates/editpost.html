@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block title %}Edit Post{% endblock %}
+
+{% block content %}
+<h2>Edit Post Page</h2>
+<p>Welcome {{ username }}!</p>
+<br>
+<form>
+    <input type="text" name="title", value={{ post[1] }}>
+    <input type="text" name="content", value={{ post[2] }}>
+    <input type="text" name="author", value={{ post[3] }}>
+</form>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h2>Home Page</h2>
+<h2><a href="{{url_for('addpost')}}">Add Post</a></h2>
+<p>Welcome back, {{ username }}!</p>
+<br>
+<table style="width:100%">
+    <tr>
+        <th><h1>ID</h1></th>
+        <th><H1>TITLE</H1></th>
+        <th><h1>CONTENT</h1></th>
+        <th><h1>Date</h1></th>
+        <th><h1>Edit</h1></th>
+        <th><h1>Delete</h1></th>
+    </tr>
+    {% for posts in post %}
+    <tr>
+        <td><h2>{{ posts['id'] }}</h2></td>
+        <td><h2>{{ posts['title'] }}</h2></td>
+        <td><h2>{{ posts['content'] }}</h2></td>
+        <td><h2>{{ posts['datetime'] }}</h2></td>
+        <td><h2><a href="{{ url_for('editpost',id=posts['id']) }}">Edit</a></h2></td>
+        <td><h2><a href="{{ url_for('deletepost',id=posts['id']) }}">Delete</a></h2></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
