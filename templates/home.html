@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>Home Page</h2>
-<h2><a href="{{url_for('addpost')}}">Add Post</a></h2>
+<h2><a href="{{url_for('addpost')}}" class="button button2">Add Post</a></h2>
 <p>Welcome back, {{ username }}!</p>
 <br>
 <table style="width:100%">
@@ -22,8 +22,8 @@
         <td><h2>{{ posts['title'] }}</h2></td>
         <td><h2>{{ posts['author'] }}</h2></td>
         <td><h2>{{ posts['datetime'] }}</h2></td>
-        <td><h2><a href="{{ url_for('editpost',id=posts['id']) }}">Edit</a></h2></td>
-        <td><h2><a href="{{ url_for('deletepost',id=posts['id']) }}">Delete</a></h2></td>
+        <td><h2><a href="{{ url_for('editpost',id=posts['id']) }}" class="button">Edit</a></h2></td>
+        <td><h2><a href="{{ url_for('deletepost',id=posts['id']) }}" class="button button3">Delete</a></h2></td>
     </tr>
     {% endfor %}
 </table>
