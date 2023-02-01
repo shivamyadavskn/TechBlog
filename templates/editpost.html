@@ -8,7 +8,7 @@
 <br>
 <form action="/update/{{ post[0] }}" , method="post">
     <strong>Title</strong><input type="text" name="title" , value={{ post[1] }}><br>
-    <strong>Content</strong><textarea name="content" rows="7" cols="50">{{ post[2] }}</textarea><br>
+    <strong>Content</strong><textarea name="content" rows="15" cols="60">{{ post[2] }}</textarea><br>
     <strong>Author</strong><input type="text" name="author" , value={{ post[3] }}><br>
     <input type="submit" value="Update Post" class="button">
 </form>
