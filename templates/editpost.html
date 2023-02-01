@@ -6,10 +6,11 @@
 <h2>Edit Post Page</h2>
 <p>Welcome {{ username }}!</p>
 <br>
-<form>
-    <input type="text" name="title", value={{ post[1] }}>
-    <input type="text" name="content", value={{ post[2] }}>
-    <input type="text" name="author", value={{ post[3] }}>
+<form action="/update/{{ post[0] }}" , method="post">
+    <strong>Title</strong><input type="text" name="title" , value={{ post[1] }}><br>
+    <strong>Content</strong><textarea name="content" rows="7" cols="50">{{ post[2] }}</textarea><br>
+    <strong>Author</strong><input type="text" name="author" , value={{ post[3] }}><br>
+    <input type="submit" value="Update Post">
 </form>
 
 {% endblock %}

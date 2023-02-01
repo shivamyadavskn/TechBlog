@@ -150,5 +150,16 @@ def deletepost(id):
     return redirect(url_for('home'))
 
 
+@app.route('/update/<int:id>', methods=['POST', 'GET'])
+def updatepost(id):
+    title = request.form.get('title')
+    content = request.form.get('content')
+    author = request.form.get('author')
+    cursor = mysql.connection.cursor()
+    cursor.execute("UPDATE blog SET title=%s,content=%s,author=%s WHERE id=%s", (title, content, author, id))
+    mysql.connection.commit()
+    return redirect(url_for('home'))
+
+
 if __name__ == '__main__':
     app.run(debug=True)
