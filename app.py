@@ -118,6 +118,8 @@ def profile():
         cursor.execute('SELECT * FROM accounts WHERE id = %s', (session['id'],))
         account = cursor.fetchone()
         # Show the profile page with account info
+        print(account)
+        print(type(account))
         return render_template('profile.html', account=account)
     # User is not loggedin redirect to login page
     return redirect(url_for('login'))
@@ -126,6 +128,7 @@ def profile():
 @app.route('/addpost', methods=['POST', 'GET'])
 def addpost():
     if 'loggedin' in session and request.method == 'POST':
+        print(session['id'])
         title = request.form.get('title')
         content = request.form.get('content')
         author = request.form.get('author')
