@@ -84,7 +84,7 @@ def register():
             msg = 'Please fill out the form!'
         else:
             # Account doesn't exist and the form data is valid, now insert new account into accounts table
-            cursor.execute('INSERT INTO accounts VALUES (NULL, %s, %s, %s)', (username, password, email,))
+            cursor.execute('INSERT INTO accounts(username, password, email) VALUES ( %s, %s, %s)', (username, password, email,))
             conn.commit()
             msg = 'You have successfully registered!'
     elif request.method == 'POST':
