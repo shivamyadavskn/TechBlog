@@ -5,12 +5,37 @@
 {% block content %}
 <h2>Edit Post Page</h2>
 <p>Welcome {{ username }}!</p>
-<br>
-<form action="/update/{{ post[0] }}" , method="post">
-    <strong>Title</strong><input type="text" name="title" , value={{ post[1] }}><br>
-    <strong>Content</strong><textarea name="content" rows="15" cols="60">{{ post[2] }}</textarea><br>
-    <strong>Author</strong><input type="text" name="author" , value={{ post[3] }}><br>
-    <input type="submit" value="Update Post" class="button">
-</form>
-
+<div class="container">
+    <form action="/update/{{ post[0] }}" , method="post">
+        <div class="row">
+            <div class="col-25">
+                <label for="fname">Title</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="fname" name="title" , value={{ post[1] }} placeholder="Your Title..">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="lname">Author Name</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="lname" name="author" , value={{ post[3] }} placeholder="Author name ">
+            </div>
+        </div>
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="subject">Contents</label>
+            </div>
+            <div class="col-75">
+                <textarea id="subject" name="content" placeholder="Write something.." style="height:200px">{{ post[2] }}</textarea>
+            </div>
+        </div>
+        <div class="row">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
 {% endblock %}
