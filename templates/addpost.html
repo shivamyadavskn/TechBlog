@@ -3,20 +3,47 @@
 {% block title %}Add Post{% endblock %}
 
 {% block content %}
-<h2>AddPost Page</h2>
-<form method="post">
-    <label for="title">Title</label>
-    <input type='text' name="title" id="title" required>
-    <br>
-    <label for="body">Body</label>
-    <textarea name="content" id="content" rows="5" cols="50"></textarea>
-    <br>
-    <label for="title">Author</label>
-    <input type='text' name="author" id="author" required>
-    <br>
-     <label for="title">Date</label>
-    <input type='text' name="date" id="date" required>
-    <br>
-    <input type="submit" value="Save" , class="button">
+<h2>ADD Post Form</h2>
+
+<div class="container">
+  <form method="post">
+    <div class="row">
+      <div class="col-25">
+        <label for="fname">Title</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="fname" name="title" placeholder="Your Title..">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Author Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="lname" name="author" placeholder="Author name ">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Date</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="lname" name="date" placeholder="Post Date ">
+      </div>
+    </div>
+    <div class="row">
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="subject">Contents</label>
+      </div>
+      <div class="col-75">
+        <textarea id="subject" name="content" placeholder="Write something.." style="height:200px"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <input type="submit" value="Submit">
+    </div>
   </form>
+</div>
 {% endblock %}
