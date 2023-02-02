@@ -1,15 +1,19 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
+import psycopg2
 import re
 
 app = Flask(__name__)
-app.config['MYSQL_HOST'] = "localhost"
-app.config['MYSQL_USER'] = "root"
-app.config['MYSQL_PASSWORD'] = "1234"
-app.config['MYSQL_DB'] = "techblog"
+# app.config['MYSQL_HOST'] = "localhost"
+# app.config['MYSQL_USER'] = "root"
+# app.config['MYSQL_PASSWORD'] = "1234"
+# app.config['MYSQL_DB'] = "techblog"
 app.config['SECRET_KEY'] = 'thisissecret'
-mysql = MySQL(app)
+# mysql = MySQL(app)
+
+conn = psycopg2.connect(
+    "postgresql://root:m2kVAvjae5EnqQtUjSijowhGZYKB9VlZ@dpg-cfcnve02i3mhen7u9uqg-a.oregon-postgres.render.com/alchemy")
 
 
 # http://localhost:5000/pythonlogin/ - the following will be our login page, which will use both GET and POST requests
@@ -24,15 +28,17 @@ def login():
         username = request.form['username']
         password = request.form['password']
         # Check if account exists using MySQL
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor = conn.cursor()
         cursor.execute('SELECT * FROM accounts WHERE username = %s AND password = %s', (username, password,))
         account = cursor.fetchone()
         # If account exists in accounts table in out database
         if account:
             # Create session data, we can access this data in other routes
             session['loggedin'] = True
-            session['id'] = account['id']
-            session['username'] = account['username']
+            #session['id'] = account['id']
+            #session['username'] = account['username']
+            session['id'] = account[0]
+            session['username'] = account[1]
             # Redirect to home page
             return redirect(url_for('home'))
         else:
@@ -64,7 +70,7 @@ def register():
         password = request.form['password']
         email = request.form['email']
         # Check if account exists using MySQL
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor = conn.cursor()
         cursor.execute('SELECT * FROM accounts WHERE username = %s', (username,))
         account = cursor.fetchone()
         # If account exists show error and validation checks
@@ -79,7 +85,7 @@ def register():
         else:
             # Account doesn't exist and the form data is valid, now insert new account into accounts table
             cursor.execute('INSERT INTO accounts VALUES (NULL, %s, %s, %s)', (username, password, email,))
-            mysql.connection.commit()
+            conn.commit()
             msg = 'You have successfully registered!'
     elif request.method == 'POST':
         # Form is empty... (no POST data)
@@ -93,7 +99,7 @@ def register():
 def home():
     # Check if user is loggedin
     if 'loggedin' in session:
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor = conn.cursor()
         cursor.execute('SELECT * FROM blog')
         post = cursor.fetchall()
         # User is loggedin show them the home page
@@ -108,7 +114,7 @@ def profile():
     # Check if user is loggedin
     if 'loggedin' in session:
         # We need all the account info for the user so we can display it on the profile page
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor = conn.cursor()
         cursor.execute('SELECT * FROM accounts WHERE id = %s', (session['id'],))
         account = cursor.fetchone()
         # Show the profile page with account info
@@ -124,10 +130,10 @@ def addpost():
         content = request.form.get('content')
         author = request.form.get('author')
         date = request.form.get('date')
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor = conn.cursor()
         cursor.execute('INSERT INTO blog(title,content,author,datetime) VALUES (%s ,%s, %s, %s)',
                        (title, content, author, date))
-        mysql.connection.commit()
+        conn.commit()
         flash('Created Successfully', None)
         return redirect(url_for('home'))
     return render_template('addpost.html')
@@ -135,7 +141,7 @@ def addpost():
 
 @app.route('/editpost/<int:id>', methods=['POST', 'GET'])
 def editpost(id):
-    cursor = mysql.connection.cursor()
+    cursor = conn.cursor()
     cursor.execute("SELECT*FROM blog where id=%s", (id,))
     editdata = cursor.fetchone()
     print(editdata)
@@ -144,9 +150,9 @@ def editpost(id):
 
 @app.route('/delete/<int:id>', methods=['POST', 'GET'])
 def deletepost(id):
-    cursor = mysql.connection.cursor()
+    cursor = conn.cursor()
     cursor.execute("DELETE FROM blog where id=%s", (id,))
-    mysql.connection.commit()
+    conn.commit()
     return redirect(url_for('home'))
 
 
@@ -155,9 +161,9 @@ def updatepost(id):
     title = request.form.get('title')
     content = request.form.get('content')
     author = request.form.get('author')
-    cursor = mysql.connection.cursor()
+    cursor = conn.cursor()
     cursor.execute("UPDATE blog SET title=%s,content=%s,author=%s WHERE id=%s", (title, content, author, id))
-    mysql.connection.commit()
+    conn.commit()
     return redirect(url_for('home'))
 
 

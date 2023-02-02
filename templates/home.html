@@ -17,11 +17,11 @@
     </tr>
     {% for posts in post %}
     <tr>
-        <td><h2>{{ posts['title'] }}</h2></td>
-        <td><h2>{{ posts['author'] }}</h2></td>
-        <td><h2>{{ posts['datetime'] }}</h2></td>
-        <td><h2><a href="{{ url_for('editpost',id=posts['id']) }}" class="button">Edit</a></h2></td>
-        <td><h2><a href="{{ url_for('deletepost',id=posts['id']) }}" class="button button3">Delete</a></h2></td>
+        <td><h2>{{ posts[1] }}</h2></td>
+        <td><h2>{{ posts[3] }}</h2></td>
+        <td><h2>{{ posts[4] }}</h2></td>
+        <td><h2><a href="{{ url_for('editpost',id=posts[0]) }}" class="button">Edit</a></h2></td>
+        <td><h2><a href="{{ url_for('deletepost',id=posts[0]) }}" class="button button3">Delete</a></h2></td>
     </tr>
     {% endfor %}
 </table>
