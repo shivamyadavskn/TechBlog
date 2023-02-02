@@ -6,23 +6,14 @@
 <h2>Home Page</h2>
 <h2><a href="{{url_for('addpost')}}" class="button button2">Add Post</a></h2>
 <p>Welcome back, {{ username }}!</p>
-<br>
-<table style="width:100%">
-    <tr>
-        <th><H1>TITLE</H1></th>
-        <th><h1>Author</h1></th>
-        <th><h1>Date</h1></th>
-        <th><h1>Edit</h1></th>
-        <th><h1>Delete</h1></th>
-    </tr>
     {% for posts in post %}
-    <tr>
-        <td><h2>{{ posts[1] }}</h2></td>
-        <td><h2>{{ posts[3] }}</h2></td>
-        <td><h2>{{ posts[4] }}</h2></td>
-        <td><h2><a href="{{ url_for('editpost',id=posts[0]) }}" class="button">Edit</a></h2></td>
-        <td><h2><a href="{{ url_for('deletepost',id=posts[0]) }}" class="button button3">Delete</a></h2></td>
-    </tr>
+    <div class="polaroid">
+        <h1><p>{{ posts[1] }}</p></h1>
+        <img src={{ posts[5] }} alt="img not found" style="width:100%" height="50%">
+        <div class="container">
+            <a href="{{ url_for('editpost',id=posts[0]) }}" class="button">Edit</a>
+            <a href="{{ url_for('deletepost',id=posts[0]) }}" class="button button3">Delete</a>
+        </div>
+    </div>
     {% endfor %}
-</table>
 {% endblock %}
