@@ -227,3 +227,18 @@ input[type=submit]:hover {
     margin-top: 0;
   }
 }
+
+/* for img post*/
+body {margin:25px;}
+
+div.polaroid {
+  width: 60%;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 25px;
+}
+
+div.container {
+  text-align: center;
+  padding: 10px 20px;
+}

@@ -35,8 +35,8 @@ def login():
         if account:
             # Create session data, we can access this data in other routes
             session['loggedin'] = True
-            #session['id'] = account['id']
-            #session['username'] = account['username']
+            # session['id'] = account['id']
+            # session['username'] = account['username']
             session['id'] = account[0]
             session['username'] = account[1]
             # Redirect to home page
@@ -84,7 +84,8 @@ def register():
             msg = 'Please fill out the form!'
         else:
             # Account doesn't exist and the form data is valid, now insert new account into accounts table
-            cursor.execute('INSERT INTO accounts(username, password, email) VALUES ( %s, %s, %s)', (username, password, email,))
+            cursor.execute('INSERT INTO accounts(username, password, email) VALUES ( %s, %s, %s)',
+                           (username, password, email,))
             conn.commit()
             msg = 'You have successfully registered!'
     elif request.method == 'POST':
@@ -133,9 +134,10 @@ def addpost():
         content = request.form.get('content')
         author = request.form.get('author')
         date = request.form.get('date')
+        imglink = request.form.get('imglink')
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO blog(title,content,author,datetime) VALUES (%s ,%s, %s, %s)',
-                       (title, content, author, date))
+        cursor.execute('INSERT INTO blog(title,content,author,datetime,imglink) VALUES (%s ,%s, %s, %s,%s)',
+                       (title, content, author, date, imglink))
         conn.commit()
         flash('Created Successfully', None)
         return redirect(url_for('home'))
@@ -164,8 +166,10 @@ def updatepost(id):
     title = request.form.get('title')
     content = request.form.get('content')
     author = request.form.get('author')
+    imglink = request.form.get('imglink')
     cursor = conn.cursor()
-    cursor.execute("UPDATE blog SET title=%s,content=%s,author=%s WHERE id=%s", (title, content, author, id))
+    cursor.execute("UPDATE blog SET title=%s,content=%s,author=%s,imglink=%s WHERE id=%s",
+                   (title, content, author, imglink, id))
     conn.commit()
     return redirect(url_for('home'))
 
