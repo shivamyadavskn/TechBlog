@@ -174,5 +174,13 @@ def updatepost(id):
     return redirect(url_for('home'))
 
 
+@app.route('/view/<int:id>', methods=['POST', 'GET'])
+def view(id):
+    cursor = conn.cursor()
+    cursor.execute("SELECT*FROM blog where id=%s", (id,))
+    post = cursor.fetchone()
+    return render_template('view.html', post=post)
+
+
 if __name__ == '__main__':
     app.run(debug=True)

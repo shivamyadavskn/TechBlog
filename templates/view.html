@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block title %}View{% endblock %}
+{% block content %}
+<h2>{{ post[1] }}</h2>
+<strong>Written By: {{ post[3] }} , {{ post[4] }}</strong>
+<br>
+<img src={{ post[5] }} alt="Not found" width="700" height="400">
+<br>
+<strong><h2>{{ post[2] }}</h2></strong>
+{% endblock %}
