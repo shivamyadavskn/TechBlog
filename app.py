@@ -1,16 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-from flask_mysqldb import MySQL
-import MySQLdb.cursors
 import psycopg2
 import re
 
 app = Flask(__name__)
-# app.config['MYSQL_HOST'] = "localhost"
-# app.config['MYSQL_USER'] = "root"
-# app.config['MYSQL_PASSWORD'] = "1234"
-# app.config['MYSQL_DB'] = "techblog"
 app.config['SECRET_KEY'] = 'thisissecret'
-# mysql = MySQL(app)
 
 conn = psycopg2.connect(
     "postgresql://root:m2kVAvjae5EnqQtUjSijowhGZYKB9VlZ@dpg-cfcnve02i3mhen7u9uqg-a.oregon-postgres.render.com/alchemy")
@@ -119,8 +112,6 @@ def profile():
         cursor.execute('SELECT * FROM accounts WHERE id = %s', (session['id'],))
         account = cursor.fetchone()
         # Show the profile page with account info
-        print(account)
-        print(type(account))
         return render_template('profile.html', account=account)
     # User is not loggedin redirect to login page
     return redirect(url_for('login'))
@@ -149,7 +140,6 @@ def editpost(id):
     cursor = conn.cursor()
     cursor.execute("SELECT*FROM blog where id=%s", (id,))
     editdata = cursor.fetchone()
-    print(editdata[1])
     return render_template('editpost.html', post=editdata)
 
 

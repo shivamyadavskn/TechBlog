@@ -242,3 +242,9 @@ div.container {
   text-align: center;
   padding: 10px 20px;
 }
+footer {
+  text-align: center;
+  padding: 3px;
+  background-color: black;
+  color: white;
+}
