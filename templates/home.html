@@ -9,8 +9,10 @@
     {% for posts in post %}
     <div class="polaroid">
         <a href="{{ url_for('view',id=posts[0]) }}"><h1><p>{{ posts[1] }}</p></h1></a>
-
+        <strong>Author: <i>{{ posts[3] }} , </i></strong>
+        <strong> <i>{{ posts[4] }}</i></strong>
         <div class="container">
+            <a href="{{ url_for('view',id=posts[0]) }}" class="button">View</a>
             <a href="{{ url_for('editpost',id=posts[0]) }}" class="button">Edit</a>
             <a href="{{ url_for('deletepost',id=posts[0]) }}" class="button button3">Delete</a>
         </div>

@@ -149,7 +149,7 @@ def editpost(id):
     cursor = conn.cursor()
     cursor.execute("SELECT*FROM blog where id=%s", (id,))
     editdata = cursor.fetchone()
-    print(editdata)
+    print(editdata[1])
     return render_template('editpost.html', post=editdata)
 
 
