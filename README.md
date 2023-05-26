@@ -1,4 +1,4 @@
-TechBlog LINK:-https://shivamyadavblog.onrender.com/
+TechBlog LINK:-https://techblogdemo.onrender.com/
 
 Blog website with multi-user feature, comments system and unique style.
 Used Technology-->Flask, Python3, Html, CSS, MYSQL, POSTGRESS..
