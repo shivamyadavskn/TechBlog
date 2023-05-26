@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'thisissecret'
 
 conn = psycopg2.connect(
-    "postgresql://root:m2kVAvjae5EnqQtUjSijowhGZYKB9VlZ@dpg-cfcnve02i3mhen7u9uqg-a.oregon-postgres.render.com/alchemy")
+    "postgres://accounts:BPqY8JN9DAufCtYdBDbi3qo815EKdqwi@dpg-choafmg2qv295pruiqe0-a.oregon-postgres.render.com/alchemy_zyif")
 
 
 # http://localhost:5000/pythonlogin/ - the following will be our login page, which will use both GET and POST requests
